@@ -4,13 +4,14 @@ import "fmt"
 
 type LinkedList struct {
 	Sentinel *DoublePointerNode
+	Length   int64
 }
 
 func NewList() *LinkedList {
 	var sentinel *DoublePointerNode = &DoublePointerNode{Id: -999999}
 	sentinel.Next = sentinel
 	sentinel.Previous = sentinel
-	return &LinkedList{sentinel}
+	return &LinkedList{sentinel, 0}
 }
 
 func (list *LinkedList) Insert(id int32) {
@@ -20,6 +21,7 @@ func (list *LinkedList) Insert(id int32) {
 	list.Sentinel.Next.Previous = node
 	list.Sentinel.Next = node
 	node.Previous = list.Sentinel
+	list.Length++
 }
 
 func (list *LinkedList) Display() {
@@ -40,8 +42,8 @@ func (list *LinkedList) Search(id int32) *DoublePointerNode {
 	return node
 }
 
-func (list *LinkedList) RemoveAll(id int32) int {
-	count := 0
+func (list *LinkedList) RemoveAll(id int32) int64 {
+	count := int64(0)
 	var node *DoublePointerNode = list.Search(id)
 
 	for node.Id != -999999 {
@@ -52,6 +54,8 @@ func (list *LinkedList) RemoveAll(id int32) int {
 		node = list.Search(id)
 		count++
 	}
+
+	list.Length -= count
 
 	return count
 }

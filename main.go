@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/geovanymds/algorithms/algorithms/sorting"
 	"github.com/geovanymds/algorithms/models"
 )
 
@@ -14,7 +15,7 @@ func main() {
 	list.Insert(95)
 	list.Insert(21)
 
-	list.RemoveAll(95)
+	sorting.BubbleSort(list)
 
 	list.Display()
 }
